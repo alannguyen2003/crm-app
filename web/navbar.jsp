@@ -3,7 +3,7 @@
     Created on : Jun 12, 2023, 8:43:58 AM
     Author     : acer
 --%>
-
+<%@taglib uri="jakarta.tags.core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,6 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <c:set var="contextPath" value="${pageContext.request.contextPath}" />
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top m-b-0">
             <div class="navbar-header"> 
@@ -19,7 +20,7 @@
                     <i class="fa fa-bars"></i>
                 </a>
                 <div class="top-left-part">
-                    <a class="logo" href="index.jsp">
+                    <a class="logo" href="${contextPath}/index">
                         <b>
                             <img src="plugins/images/pixeladmin-logo.png" alt="home" />
                         </b>
@@ -43,13 +44,13 @@
                         <div class="dropdown">
                             <a class="profile-pic dropdown-toggle" data-toggle="dropdown" href="#"> 
                                 <img src="plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle" />
-                                <b class="hidden-xs">googleapis</b> 
+                                <b class="hidden-xs">${sessionScope.user.fullname}</b> 
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="profile.html">Thông tin cá nhân</a></li>
+                                <li><a href="#">Thông tin cá nhân</a></li>
                                 <li><a href="#">Thống kê công việc</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">Đăng xuất</a></li>
+                                <li><a href="${contextPath}/logout">Đăng xuất</a></li>
                             </ul>
                         </div>
                     </li>

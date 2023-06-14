@@ -4,21 +4,28 @@
  */
 package com.alannguyen.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
+import com.alannguyen.entity.RoleEntity;
+import com.alannguyen.service.RoleService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  *
  * @author acer
  */
-@WebServlet(name = "DashboardController", urlPatterns = {"/index"})
-public class DashboardController extends HttpServlet {
+@WebServlet(name = "ListRoleController", urlPatterns = {"/listrole"})
+public class ListRoleController extends HttpServlet {
 
+    private RoleService roleService = new RoleService();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -32,7 +39,12 @@ public class DashboardController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            response.sendRedirect("index.jsp");
+            /* TODO output your page here. You may use following sample code. */
+            ArrayList<RoleEntity> list = roleService.getAllRoles();
+            request.setAttribute("list", list);
+            request.getRequestDispatcher("role.jsp").forward(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(ListRoleController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

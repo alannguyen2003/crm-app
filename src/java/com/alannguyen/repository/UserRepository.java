@@ -6,6 +6,7 @@ package com.alannguyen.repository;
 
 import java.sql.*;
 import com.alannguyen.entity.UserEntity;
+import com.alannguyen.payload.request.UserRequest;
 import com.alannguyen.util.DBUtil;
 import java.util.ArrayList;
 
@@ -15,26 +16,26 @@ import java.util.ArrayList;
  */
 public class UserRepository {
 
-    public ArrayList<UserEntity> getAllUser() throws Exception {
-        ArrayList<UserEntity> list = new ArrayList<>();
+    public ArrayList<UserRequest> getAllUser() throws Exception {
+        ArrayList<UserRequest> list = new ArrayList<>();
         Connection cn = DBUtil.makeConnection();
         PreparedStatement pst;
         ResultSet rs = null;
         if (cn != null) {
-            String query = "select * from users";
+            String query = "select u.id, u.email, u.fullname, r.name, u.phone from users u \n"
+                    + "join roles r\n"
+                    + "on u.role_id = r.id";
             pst = cn.prepareStatement(query);
             rs = pst.executeQuery();
         }
         if (rs != null) {
             while (rs.next()) {
-                UserEntity entity = new UserEntity();
+                UserRequest entity = new UserRequest();
                 entity.setId(rs.getInt(1));
                 entity.setEmail(rs.getNString(2));
-                entity.setPassword(rs.getNString(3));
-                entity.setFullname(rs.getNString(4));
-                entity.setAvatar(rs.getNString(5));
-                entity.setRoleId(rs.getInt(6));
-                entity.setPhone(rs.getString(7));
+                entity.setFullname(rs.getNString(3));
+                entity.setRoleName(rs.getNString(4));
+                entity.setPhone(rs.getString(5));
                 list.add(entity);
             }
         }

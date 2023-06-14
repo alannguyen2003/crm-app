@@ -39,7 +39,7 @@ public class LoginController extends HttpServlet {
             if (userService.checkLogin(email, password)) {
                 HttpSession session = req.getSession();
                 session.setAttribute("user", userRepository.getAccount(email, password));
-                req.getRequestDispatcher("/admin/index").forward(req, resp);
+                req.getRequestDispatcher("/index").forward(req, resp);
             } else {
                 req.setAttribute("message", "Wrong email or password!!");
                 req.getRequestDispatcher("login.jsp").forward(req, resp);

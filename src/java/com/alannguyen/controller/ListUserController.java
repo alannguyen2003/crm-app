@@ -4,21 +4,29 @@
  */
 package com.alannguyen.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
+import com.alannguyen.entity.UserEntity;
+import com.alannguyen.payload.request.UserRequest;
+import com.alannguyen.service.UserService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  *
  * @author acer
  */
-@WebServlet(name = "DashboardController", urlPatterns = {"/index"})
-public class DashboardController extends HttpServlet {
-
+@WebServlet(name = "ListUserController", urlPatterns = {"/listuser"})
+public class ListUserController extends HttpServlet {
+    
+    private UserService userService = new UserService();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -32,7 +40,12 @@ public class DashboardController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            response.sendRedirect("index.jsp");
+            /* TODO output your page here. You may use following sample code. */
+            ArrayList<UserRequest> list = userService.getAllUsers();
+            request.setAttribute("list", list);
+            request.getRequestDispatcher("user.jsp").forward(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(ListUserController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

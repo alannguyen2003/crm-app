@@ -4,20 +4,22 @@
  */
 package com.alannguyen.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 
 /**
  *
  * @author acer
  */
-@WebServlet(name = "DashboardController", urlPatterns = {"/index"})
-public class DashboardController extends HttpServlet {
+@WebServlet(name = "LogoutController", urlPatterns = {"/logout"})
+public class LogoutController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,7 +34,10 @@ public class DashboardController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            response.sendRedirect("index.jsp");
+            /* TODO output your page here. You may use following sample code. */
+            HttpSession session = request.getSession();
+            session.invalidate();
+            response.sendRedirect("login.jsp");
         }
     }
 
