@@ -1,3 +1,10 @@
+<%-- 
+    Document   : 404
+    Created on : Jun 15, 2023, 7:25:47 AM
+    Author     : acer
+--%>
+<%@taglib uri="jakarta.tags.core" prefix="c" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,6 +33,7 @@
 </head>
 
 <body>
+    <c:set var="contextPath" value="${pageContext.request.contextPath}" />
     <!-- Preloader -->
     <div class="preloader">
         <div class="cssload-speeding-wheel"></div>
@@ -36,7 +44,7 @@
                 <h1>403</h1>
                 <h3 class="text-uppercase">Bạn không có quyền truy cập !</h3>
                 <p class="text-muted m-t-30 m-b-30">YOU SEEM TO BE TRYING TO FIND HIS WAY HOME</p>
-                <a href="index.jsp" class="btn btn-info btn-rounded waves-effect waves-light m-b-40">Về trang chủ</a> </div>
+                <a href="${contextPath}/index" class="btn btn-info btn-rounded waves-effect waves-light m-b-40">Về trang chủ</a> </div>
             <footer class="footer text-center">2018 © Pixel Admin.</footer>
         </div>
     </section>
