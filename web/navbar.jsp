@@ -47,7 +47,7 @@
                                 <b class="hidden-xs">${sessionScope.user.fullname}</b> 
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Thông tin cá nhân</a></li>
+                                <li><a href="${contextPath}/profile">Thông tin cá nhân</a></li>
                                 <li><a href="#">Thống kê công việc</a></li>
                                 <li class="divider"></li>
                                 <li><a href="${contextPath}/logout">Đăng xuất</a></li>
